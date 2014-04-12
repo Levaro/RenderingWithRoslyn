@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Levaro Roslyn Development" Description="This rule set contains Code Analysis rules used by projects in this Solution" ToolsVersion="12.0">
+<RuleSet Name="Levaro Roslyn Development" Description="This rule set contains Code Analysis rules used by projects in this solution" ToolsVersion="12.0">
     <IncludeAll Action="Warning" />
     <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
         <Rule Id="CA1014" Action="None" />

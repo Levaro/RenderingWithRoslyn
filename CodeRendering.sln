@@ -7,7 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		SolutionItems\CustomDictionary.xml = SolutionItems\CustomDictionary.xml
 		SolutionItems\CustomDictionary.xsd = SolutionItems\CustomDictionary.xsd
+		SolutionItems\GlobalAssemblyInfo.cs = SolutionItems\GlobalAssemblyInfo.cs
 		SolutionItems\Levaro.ruleset = SolutionItems\Levaro.ruleset
+		SolutionItems\LevaroUnitTests.ruleset = SolutionItems\LevaroUnitTests.ruleset
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
@@ -16,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{908BDFFE-8105-4E6A-B9B8-88118EFF739B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levaro.Roslyn", "Source\Levaro.Roslyn\Levaro.Roslyn.csproj", "{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levaro.Roslyn.UnitTests", "Tests\Levaro.Roslyn.UnitTests\Levaro.Roslyn.UnitTests.csproj", "{1FCABF79-00C1-4750-A7CC-7EFA448149FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,11 +31,16 @@ Global
 		{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCABF79-00C1-4750-A7CC-7EFA448149FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCABF79-00C1-4750-A7CC-7EFA448149FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCABF79-00C1-4750-A7CC-7EFA448149FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCABF79-00C1-4750-A7CC-7EFA448149FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{571B4481-2E8E-434A-BBFF-B6952ACF3A0C} = {50EE4053-E18E-4DA3-A51B-CD58E1364861}
+		{1FCABF79-00C1-4750-A7CC-7EFA448149FD} = {908BDFFE-8105-4E6A-B9B8-88118EFF739B}
 	EndGlobalSection
 EndGlobal
