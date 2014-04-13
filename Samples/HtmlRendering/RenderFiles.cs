@@ -65,9 +65,7 @@ namespace HtmlRendering
         /// different source folder. The source and target folders are specified for the Roslyn access source files - to execute
         /// this from Visual Studio, make HtmlRendering the StartUp Project and click Ctrl+F5 (Build | Start Without Debugging).
         /// </remarks>
-        /// <param name="args">The arguments for the application. The first argument is the path (it can be relative) to
-        /// the folder where the source files reside; the second the target folder path..</param>
-        internal static void Main(string[] args)
+        internal static void Main()
         {
             // TODO: Include a general command line parsing mechanism to allow full configuration from the command line.
             RenderFiles renderFiles = new RenderFiles(Path.GetFullPath(@"..\..\..\..\Source\Levaro.Roslyn"),
