@@ -62,17 +62,16 @@ namespace HtmlRendering
         /// This simple application renders each of the C# source code files as HTML files. The default configuration for the
         /// <see cref="HtmlRenderer"/> is used except that line numbers are included. Metadata references are included
         /// for the source files in the Roslyn access (Levaro.Roslyn) folder - they should be altered or removed if using a
-        /// different source folder. The project properties specify command line arguments that render each of the files in that
-        /// folder - just execute this file using Ctrl+F5 (Debug | Start Without Debugging) to see the results.
+        /// different source folder. The source and target folders are specified for the Roslyn access source files - to execute
+        /// this from Visual Studio, make HtmlRendering the StartUp Project and click Ctrl+F5 (Build | Start Without Debugging).
         /// </remarks>
         /// <param name="args">The arguments for the application. The first argument is the path (it can be relative) to
         /// the folder where the source files reside; the second the target folder path..</param>
         internal static void Main(string[] args)
         {
-            // Both source and target folders should exist and are specified as the first two parameters. Everything will fail
-            // miserable if not done.
             // TODO: Include a general command line parsing mechanism to allow full configuration from the command line.
-            RenderFiles renderFiles = new RenderFiles(Path.GetFullPath(args[0]), Path.GetFullPath(args[1]));
+            RenderFiles renderFiles = new RenderFiles(Path.GetFullPath(@"..\..\..\..\Source\Levaro.Roslyn"),
+                                                      Path.GetFullPath(@"..\..\Generated Html"));
             List<string> sourceFiles = Directory.GetFiles(renderFiles.SourceFolderPath, "*.cs", SearchOption.AllDirectories)
                                                 .Where(f => !(f.Contains("obj") || f.Contains("bin")))
                                                 .ToList();
