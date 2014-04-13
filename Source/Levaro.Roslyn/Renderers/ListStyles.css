@@ -1,0 +1,164 @@
+﻿/*
+    Styles for lists an elements that can be used with the HtmlRender to produce an HTML rendering of the C# code.
+    A list (ordered or unordered) is within a container DIV element and each line of code is displayed within a corresponding
+    list element (LI). Within each line, C# elements are highlighted by surrounding with a SPAN tag having a class specifying 
+    on of the HtmlClassName enumeration values. These classes really do nothing except set the color. For example,
+
+    namespace HtmlTest
+    {
+        internal sealed class Program
+        {
+        }
+    }
+    
+    is rendered by the HtmlRender using the defaults as:
+   
+    <!-- HTML was automatically rendered by HtmlRenderer on Sunday April 13, 2014 at 11:19 AM (Central Daylight Time) -->
+
+    <div class="CodeContainer">
+        <ul>
+            <li class="Alternate"><span class="Keyword">namespace</span> SimpleCode</li>
+            <li>{</li>
+            <li class="Alternate">    <span class="Keyword">internal</span> <span class="Keyword">sealed</span> <span class="Keyword">class</span> <span class="Identifier">Program</span></li>
+            <li>    {</li>
+            <li class="Alternate">        <span class="Keyword">internal</span> <span class="Keyword">static</span> <span class="Keyword"></span>Main()</li>
+            <li>        {</li>
+            <li class="Alternate">            <span class="Identifier">Console</span>.<span class="Identifier">WriteLine</span>(<span class="StringLiteral">&quot;Hello, World!&quot;</span>);</li>
+            <li>        }</li>
+            <li class="Alternate">    }</li>
+            <li>}</li>
+        </ul>
+    </div>
+*/
+
+/* Sets up the container of the list (code lines) with general styles for fonts and colors */
+div.CodeContainer
+{
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 20px;
+    font-family: Consolas, 'Lucida Console', 'DejaVu Sans Mono', monospace;
+    font-size: 11pt;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.1em;
+    text-align: left;
+    color: #1d1b1b;
+    background-color: #ffffff;
+    border: 1px solid #282828;
+}
+
+    /* If line numbers are not specified, then a simple unordered list is used having no bullets images. */
+    div.CodeContainer > ul
+    {
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        list-style: none;
+    }
+
+        /* White space is preserved in the line (list elements) using pre-wrap. */
+        div.CodeContainer > ul > li
+        {
+            padding-left: 5px;
+            white-space: pre-wrap;
+            background-color: #ffffff;
+        }
+
+    /* 
+        If lines numbers are specified, then an order list is used and to format the line numbers properly, a custom counter is
+        used. The background-color appears as the background color for the line numbers because of where they are positioned
+        in the list element (LI tag).
+    */
+    div.CodeContainer > ol
+    {
+        counter-reset: li;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        background-color: #e0e0e0;
+        list-style: none;
+    }
+
+        /*
+            A margin is specified where the line numbers are rendered (see ::before) and the position is set so that the
+            line numbers can be absolutely positioned.
+        */
+        div.CodeContainer > ol > li
+        {
+            position: relative;
+            margin: 0px 0px 0px 44px;
+            padding-left: 5px;
+            background-color: #ffffff;
+            border-left: 1px solid #282828;
+            white-space: pre-wrap;
+        }
+
+            /* This actually displays the line numbers by absolutely positioning then to the left of the LI element. */
+            div.CodeContainer > ol > li::before
+            {
+                content: counter(li);
+                counter-increment: li;
+                position: absolute;
+                top: 0px;
+                left: -48px;
+                width: 39px;
+                padding-right: 5px;
+                text-align: right;
+                color: #a0a0a0;
+            }
+
+    /* This class is placed on alternate LI elements if HtmlRenderer.AlternateLines property is set. */
+    div.CodeContainer li.Alternate
+    {
+        background-color: #f3f3f3;
+    }
+
+    /* All the following just set the color of the syntactical elements */
+    div.CodeContainer li span.NumericLiteral
+    {
+        color: #1d1b1b;
+    }
+
+    div.CodeContainer li span.Keyword
+    {
+        color: #0000ff;
+    }
+
+    div.CodeContainer li span.StringLiteral
+    {
+        color: #a31515;
+    }
+
+    div.CodeContainer li span.CharacterLiteral
+    {
+        color: #a31515;
+    }
+
+    div.CodeContainer li span.Identifier
+    {
+        color: #2b91af;
+    }
+
+    div.CodeContainer li span.UnknownIdentifier
+    {
+        color: #2b91af;
+        font-style: italic;
+    }
+
+    div.CodeContainer li span.Comment
+    {
+        color: #008000;
+    }
+
+    div.CodeContainer li span.DocumentationComment
+    {
+        color: #808080;
+    }
+
+    div.CodeContainer li span.Region
+    {
+        color: #0000ff;
+    }
+
+    div.CodeContainer li span.DisabledText
+    {
+        color: #dfcddb;
+    }

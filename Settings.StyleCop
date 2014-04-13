@@ -1,10 +1,12 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <CollectionProperty Name="RecognizedWords">
+      <Value>css</Value>
       <Value>Levaro</Value>
       <Value>linq</Value>
       <Value>Linq</Value>
       <Value>mscorlib</Value>
+      <Value>obj</Value>
       <Value>ol</Value>
       <Value>Queryable</Value>
       <Value>relinq</Value>

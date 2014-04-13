@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <MSTest>
+        <CaptureTraceOutput>false</CaptureTraceOutput>
+        <DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>
+    </MSTest>
+</RunSettings>

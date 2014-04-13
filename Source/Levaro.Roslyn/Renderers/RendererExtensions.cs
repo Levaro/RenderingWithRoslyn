@@ -99,7 +99,7 @@ namespace Levaro.Roslyn.Renderers
 
                 if (symbol == null)
                 {
-                    symbol = model.LookupSymbols(syntaxNode.Span.Start, name: token.Text).SingleOrDefault();
+                    symbol = model.LookupSymbols(syntaxNode.Span.Start, name: token.Text).FirstOrDefault();
                 }
             }
 
