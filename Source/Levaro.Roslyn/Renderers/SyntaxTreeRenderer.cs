@@ -72,50 +72,52 @@ namespace Levaro.Roslyn.Renderers
         /// </code>
         /// is rendered as
         /// <code>
-        /// ►Node CompilationUnit |static void Main() {Console.WriteLine("Hello");}| [0..46)
-        ///     ►Node MethodDeclaration |static void Main() {Console.WriteLine("Hello");}| [0..46)
+        /// <![CDATA[
+        /// >Node CompilationUnit |static void Main() {Console.WriteLine("Hello");}| [0..46)
+        ///     >Node MethodDeclaration |static void Main() {Console.WriteLine("Hello");}| [0..46)
         ///         Token StaticKeyword |static| [0..6) 1 trailing trivia  Parent.Kind=MethodDeclaration
         ///         Trivia WhitespaceTrivia | | [6..7)  for Token StaticKeyword
-        ///         ►Node PredefinedType |void| [7..11)
+        ///         >Node PredefinedType |void| [7..11)
         ///             Token VoidKeyword |void| [7..11) 1 trailing trivia  Parent.Kind=PredefinedType
         ///             Trivia WhitespaceTrivia | | [11..12)  for Token VoidKeyword
-        ///         ◄Node PredefinedType |void| [7..11)
+        ///         <Node PredefinedType |void| [7..11)
         ///         Token IdentifierToken |Main| [12..16)  Parent.Kind=MethodDeclaration
-        ///         ►Node ParameterList |()| [16..18)
+        ///         >Node ParameterList |()| [16..18)
         ///             Token OpenParenToken |(| [16..17)  Parent.Kind=ParameterList
         ///             Token CloseParenToken |)| [17..18) 1 trailing trivia  Parent.Kind=ParameterList
         ///             Trivia WhitespaceTrivia | | [18..19)  for Token CloseParenToken
-        ///         ◄Node ParameterList |()| [16..18)
-        ///         ►Node Block |{Console.WriteLine("Hello");}| [19..46)
+        ///         <Node ParameterList |()| [16..18)
+        ///         >Node Block |{Console.WriteLine("Hello");}| [19..46)
         ///             Token OpenBraceToken |{| [19..20)  Parent.Kind=Block
-        ///             ►Node ExpressionStatement |Console.WriteLine("Hello");| [20..45)
-        ///                 ►Node InvocationExpression |Console.WriteLine("Hello")| [20..44)
-        ///                     ►Node MemberAccessExpression |Console.WriteLine| [20..35)
-        ///                         ►Node IdentifierName |Console| [20..27)
+        ///             >Node ExpressionStatement |Console.WriteLine("Hello");| [20..45)
+        ///                 >Node InvocationExpression |Console.WriteLine("Hello")| [20..44)
+        ///                     >Node MemberAccessExpression |Console.WriteLine| [20..35)
+        ///                         >Node IdentifierName |Console| [20..27)
         ///                             Token IdentifierToken |Console| [20..27)  Parent.Kind=IdentifierName
-        ///                         ◄Node IdentifierName |Console| [20..27)
+        ///                         <Node IdentifierName |Console| [20..27)
         ///                         Token DotToken |.| [27..28)  Parent.Kind=MemberAccessExpression
-        ///                         ►Node IdentifierName |WriteLine| [28..35)
+        ///                         >Node IdentifierName |WriteLine| [28..35)
         ///                             Token IdentifierToken |WriteLine| [28..35)  Parent.Kind=IdentifierName
-        ///                         ◄Node IdentifierName |WriteLine| [28..35)
-        ///                     ◄Node MemberAccessExpression |Console.WriteLine| [20..35)
-        ///                     ►Node ArgumentList |("Hello")| [35..44)
+        ///                         <Node IdentifierName |WriteLine| [28..35)
+        ///                     <Node MemberAccessExpression |Console.WriteLine| [20..35)
+        ///                     >Node ArgumentList |("Hello")| [35..44)
         ///                         Token OpenParenToken |(| [35..36)  Parent.Kind=ArgumentList
-        ///                         ►Node Argument |"Hello"| [36..43)
-        ///                             ►Node StringLiteralExpression |"Hello"| [36..43)
+        ///                         >Node Argument |"Hello"| [36..43)
+        ///                             >Node StringLiteralExpression |"Hello"| [36..43)
         ///                                 Token StringLiteralToken |"Hello"| [36..43)  Parent.Kind=StringLiteralExpression
-        ///                             ◄Node StringLiteralExpression |"Hello"| [36..43)
-        ///                         ◄Node Argument |"Hello"| [36..43)
+        ///                             <Node StringLiteralExpression |"Hello"| [36..43)
+        ///                         <Node Argument |"Hello"| [36..43)
         ///                         Token CloseParenToken |)| [43..44)  Parent.Kind=ArgumentList
-        ///                     ◄Node ArgumentList |("Hello")| [35..44)
-        ///                 ◄Node InvocationExpression |Console.WriteLine("Hello")| [20..44)
+        ///                     <Node ArgumentList |("Hello")| [35..44)
+        ///                 <Node InvocationExpression |Console.WriteLine("Hello")| [20..44)
         ///                 Token SemicolonToken |;| [44..45)  Parent.Kind=ExpressionStatement
-        ///             ◄Node ExpressionStatement |Console.WriteLine("Hello");| [20..45)
+        ///             <Node ExpressionStatement |Console.WriteLine("Hello");| [20..45)
         ///             Token CloseBraceToken |}| [45..46)  Parent.Kind=Block
-        ///         ◄Node Block |{Console.WriteLine("Hello");}| [19..46)
-        ///     ◄Node MethodDeclaration |static void Main() {Console.WriteLine("Hello");}| [0..46)
+        ///         <Node Block |{Console.WriteLine("Hello");}| [19..46)
+        ///     <Node MethodDeclaration |static void Main() {Console.WriteLine("Hello");}| [0..46)
         ///     Token EndOfFileToken || [46..46)  Parent.Kind=CompilationUnit
-        /// ◄Node CompilationUnit |static void Main() {Console.WriteLine("Hello");}| [0..46)
+        /// <Node CompilationUnit |static void Main() {Console.WriteLine("Hello");}| [0..46)
+        /// ]]>
         /// </code>
         /// </remarks>
         /// <param name="treeElement">A <see cref="SyntaxTreeElement"/> instance that contains the wrapped syntax tree element

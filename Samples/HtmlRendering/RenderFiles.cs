@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
+using System.Text.RegularExpressions;
 using Levaro.Roslyn;
 using Levaro.Roslyn.Renderers;
-
 using Microsoft.CodeAnalysis;
 
 namespace HtmlRendering
@@ -85,6 +84,13 @@ namespace HtmlRendering
             {
                 defaultCss = reader.ReadToEnd();
             }
+
+            // The embedded stylesheet has a lot of comments that are not necessary, so remove those and any blank lines just
+            // so the generated HTML is not any bigger than it need be. First the CSS comments "/*...*/":
+            string noComments = Regex.Replace(defaultCss, @"(/\*.*?\*/)", string.Empty, RegexOptions.Singleline);
+
+            // And now any blank lines (some may have been created when removing comments too!):
+            defaultCss = Regex.Replace(noComments, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
 
             // The PageTemplate.html is a small HTML file having {{text}} that is replaced to create a stand-alone page for the
             // generated HTML code. The default style sheet (see ListStyle.css in Levaro.Roslyn.Renderers) is an embedded
