@@ -1,4 +1,4 @@
-﻿namespace Levaro.Roslyn
+﻿namespace Levaro.CSharp.Display
 {
     /// <summary>
     /// Represents the state of the <c>CodeWalker</c> syntax tree visitor.

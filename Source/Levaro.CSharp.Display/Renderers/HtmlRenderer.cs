@@ -8,16 +8,17 @@ using System.Web;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Levaro.Roslyn.Renderers
+namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
     /// Renders C# program code to text having HTML markup suitable for display in a web browser.
     /// </summary>
     /// <remarks>
-    /// Using the syntax tree and semantic model provided by Roslyn, each token and trivia is inspected for its syntax and meaning
-    /// and wrapped in a "span" tag having a CSS class name. Each line of the formatted code is represented in a list item ("li")
-    /// tag. If line numbers are requested, an ordered list is used. Similarly, alternate lines can be highlighted. The actual
-    /// rendering in the browser is determined by the definitions of the CSS tags and classes emitted by this renderer.
+    /// Using the syntax tree and semantic model provided by the .NET Compiler Platform ("Roslyn"), each token and trivia is 
+    /// inspected for its syntax and meaning and wrapped in a "span" tag having a CSS class name. Each line of the formatted code 
+    /// is represented in a list item ("li") tag. If line numbers are requested, an ordered list is used. Similarly, alternate 
+    /// lines can be highlighted. The actual rendering in the browser is determined by the definitions of the CSS tags and classes 
+    /// emitted by this renderer.
     /// <para>
     /// As a subclass of <see cref="CoreRenderer"/>, the real work is done by the callback delegate. The following examples
     /// illustrates the rendered HTML for a simple code fragment using the specified property settings:

@@ -6,8 +6,8 @@
     <ProjectGuid>{1FCABF79-00C1-4750-A7CC-7EFA448149FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Levaro.Roslyn.UnitTests</RootNamespace>
-    <AssemblyName>Levaro.Roslyn.UnitTests</AssemblyName>
+    <RootNamespace>Levaro.CSharp.Display.UnitTests</RootNamespace>
+    <AssemblyName>Levaro.CSharp.Display.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -26,9 +26,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Levaro.Roslyn.UnitTests.XML</DocumentationFile>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\SolutionItems\LevaroTests.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\Levaro.CSharp.Display.UnitTests.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\SolutionItems\CSharp.Display.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,9 +77,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Levaro.Roslyn\Levaro.Roslyn.csproj">
+    <ProjectReference Include="..\..\Source\Levaro.CSharp.Display\Levaro.CSharp.Display.csproj">
       <Project>{571b4481-2e8e-434a-bbff-b6952acf3a0c}</Project>
-      <Name>Levaro.Roslyn</Name>
+      <Name>Levaro.CSharp.Display</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

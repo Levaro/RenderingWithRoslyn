@@ -1,4 +1,4 @@
-﻿namespace Levaro.Roslyn.Renderers
+﻿namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
     /// Renders code as just a list of <see cref="SyntaxTreeElement"/> objects recovered from the generated <c>SyntaxTree</c>.

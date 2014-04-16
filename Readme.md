@@ -25,13 +25,13 @@ render C# code as HTML using the <code>HtmlRender</code> class. For each token, 
 (and trivia) text with "span" tags having class attributes. For example, 
 
     string code = @"namespace SimpleCode
-	{
-    	internal sealed class Program
-    	{
-        	internal static Main()
-        	{
-            	Console.WriteLine(""Hello, World!"");
-        	}
+    {
+        internal sealed class Program
+        {
+            internal static Main()
+            {
+                Console.WriteLine(""Hello, Roslyn!"");
+            }
     }; 
 
     HtmlRenderer render = new HtmlRenderer();
@@ -78,7 +78,9 @@ This package does not change the C# compiler is Visual Studio so none of your pr
         - GetText, GetLineStartText, GetLineEndText
         - GetHtmlClass (token and trivia), 
         - GetIdentifierTokenHtmlClass
-    - 
+        - Default style sheet (embedded resource)
+
+
 ## Status ##
 This is an initial pre-release for project and includes the core class library which contains the 
 syntax tree visitor and code renderers. The core class library (Levaro.Roslyn) targets .NET 4.5.1, and enables both Code Analysis

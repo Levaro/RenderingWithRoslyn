@@ -25,7 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\HtmlRendering.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\SolutionItems\LevaroTests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\SolutionItems\CSharp.Display.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -72,9 +72,9 @@
     <Folder Include="Generated Html\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Levaro.Roslyn\Levaro.Roslyn.csproj">
+    <ProjectReference Include="..\..\Source\Levaro.CSharp.Display\Levaro.CSharp.Display.csproj">
       <Project>{571b4481-2e8e-434a-bbff-b6952acf3a0c}</Project>
-      <Name>Levaro.Roslyn</Name>
+      <Name>Levaro.CSharp.Display</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

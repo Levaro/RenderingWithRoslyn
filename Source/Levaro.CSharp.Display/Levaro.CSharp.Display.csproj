@@ -7,8 +7,8 @@
     <ProjectGuid>{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Levaro.Roslyn</RootNamespace>
-    <AssemblyName>Levaro.Roslyn</AssemblyName>
+    <RootNamespace>Levaro.CSharp.Display</RootNamespace>
+    <AssemblyName>Levaro.CSharp.Display</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>7e4f4bd2</NuGetPackageImportStamp>
@@ -21,9 +21,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Levaro.Roslyn.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Levaro.CSharp.Display.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\SolutionItems\Levaro.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\SolutionItems\CSharp.Display.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

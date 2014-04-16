@@ -1,4 +1,4 @@
-﻿namespace Levaro.Roslyn.Renderers
+﻿namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
     /// Specifies the HTML class name that can be affixed to an HTML tag enclosing syntax tokens or trivia when rendered in HTML.

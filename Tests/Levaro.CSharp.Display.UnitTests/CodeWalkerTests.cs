@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Levaro.Roslyn.UnitTests
+namespace Levaro.CSharp.Display.UnitTests
 {
     /// <summary>
     /// Test fixture for the methods that test the <see cref="CodeWalker"/> class.

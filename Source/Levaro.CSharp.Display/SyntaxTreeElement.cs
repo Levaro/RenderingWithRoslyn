@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Levaro.Roslyn
+namespace Levaro.CSharp.Display
 {
     /// <summary>
     /// A convenience class that wraps <see cref="SyntaxNode"/>, <see cref="SyntaxToken"/> and <see cref="SyntaxTrivia"/> instances

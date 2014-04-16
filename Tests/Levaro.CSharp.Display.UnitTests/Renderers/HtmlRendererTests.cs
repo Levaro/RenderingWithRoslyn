@@ -2,14 +2,13 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
-using Levaro.Roslyn.Renderers;
+using Levaro.CSharp.Display.Renderers;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Levaro.Roslyn.UnitTests.Renderers
+namespace Levaro.CSharp.Display.UnitTests.Renderers
 {
     /// <summary>
     /// Test fixture for the HTML renderer
@@ -18,21 +17,30 @@ namespace Levaro.Roslyn.UnitTests.Renderers
     public class HtmlRendererTests
     {
         /// <summary>
-        /// Checks that the ListStyles.css class is an embedded resource in the Levaro.Roslyn assembly and the content data 
+        /// Checks that the ListStyles.css and ListStyles.min.css are an embedded resources in the Levaro.CSharp.Display assembly and the content data 
         /// are exactly that of the file.
         /// </summary>
         [TestMethod]
-        [DeploymentItem(@"..\..\..\..\Source\Levaro.Roslyn\Renderers\ListStyles.css", ".")]
+        [DeploymentItem(@"..\..\..\..\Source\Levaro.CSharp.Display\Renderers\ListStyles.css", ".")]
+        [DeploymentItem(@"..\..\..\..\Source\Levaro.CSharp.Display\Renderers\ListStyles.min.css", ".")]
         public void ListStylesTest()
         {
             Assembly roslyn = typeof(CodeWalker).Assembly;
             string embeddedStyleSheet = string.Empty;
-            using (StreamReader reader = new StreamReader(roslyn.GetManifestResourceStream("Levaro.Roslyn.Renderers.ListStyles.css")))
+            using (StreamReader reader = new StreamReader(roslyn.GetManifestResourceStream("Levaro.CSharp.Display.Renderers.ListStyles.css")))
             {
                 embeddedStyleSheet = reader.ReadToEnd();
             }
 
             string cssFile = File.ReadAllText("ListStyles.css");
+            Assert.AreEqual<string>(cssFile, embeddedStyleSheet);
+
+            using (StreamReader reader = new StreamReader(roslyn.GetManifestResourceStream("Levaro.CSharp.Display.Renderers.ListStyles.min.css")))
+            {
+                embeddedStyleSheet = reader.ReadToEnd();
+            }
+
+            cssFile = File.ReadAllText("ListStyles.css");
             Assert.AreEqual<string>(cssFile, embeddedStyleSheet);
         }
 
@@ -43,30 +51,37 @@ namespace Levaro.Roslyn.UnitTests.Renderers
         [TestMethod]
         public void HtmlRendererTraceTest()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            TraceListener listener = new TextWriterTraceListener(memoryStream, "HtmlRenderer");
-            Trace.Listeners.Add(listener);
+            using (StringWriter writer = new StringWriter())
+            {
+                TextWriterTraceListener listener = new TextWriterTraceListener(writer, "HtmlRenderer");
+                {
+                    Trace.Listeners.Add(listener);
 
-            Assert.IsTrue(Trace.Listeners.OfType<TraceListener>().Any(l => l.Name == "HtmlRenderer"));
+                    // Force rendering so that tracing occurs.
+                    (new HtmlRenderer()).Render("Console.WriteLine(\"Hello, TraceListener\");");
+                    Assert.IsTrue(Trace.Listeners.OfType<TraceListener>().Any(l => l.Name == "HtmlRenderer"));
 
-            string code = @"Console.WriteLine(""Hello, TraceListener"");";
-            string codeHtml = (new HtmlRenderer()).Render(code);
-            string traceContents = Encoding.UTF8.GetString(memoryStream.GetBuffer()).Substring(0, (int)memoryStream.Length);
-            Assert.IsTrue(traceContents.Length > 0);
+                    string traceContents = writer.GetStringBuilder().ToString();
+                    Assert.IsTrue(traceContents.Length > 0);
+                }
 
-            Trace.Listeners.Remove("HtmlRenderer");
+                Trace.Listeners.Remove("HtmlRenderer");
+                writer.GetStringBuilder().Clear();
 
-            memoryStream = new MemoryStream();
-            listener = new TextWriterTraceListener(memoryStream, "NotAnHtmlRenderer");
-            Trace.Listeners.Add(listener);
+                listener = new TextWriterTraceListener(writer, "NotAnHtmlRenderer");
+                {
+                    Trace.Listeners.Add(listener);
 
-            Assert.IsFalse(Trace.Listeners.OfType<TraceListener>().Any(l => l.Name == "HtmlRenderer"));
+                    // Force rendering so that tracing could occur if the right listener is added.
+                    (new HtmlRenderer()).Render("Console.WriteLine(\"Hello, TraceListener\");");
+                    Assert.IsFalse(Trace.Listeners.OfType<TraceListener>().Any(l => l.Name == "HtmlRenderer"));
 
-            codeHtml = (new HtmlRenderer()).Render(code);
-            traceContents = Encoding.UTF8.GetString(memoryStream.GetBuffer()).Substring(0, (int)memoryStream.Length);
-            Assert.AreEqual<int>(0, traceContents.Length);
+                    string traceContents = writer.GetStringBuilder().ToString();
+                    Assert.AreEqual<int>(0, traceContents.Length);
+                }
 
-            Trace.Listeners.Remove("NotAnHtmlRenderer");
+                Trace.Listeners.Remove("NotAnHtmlRenderer");
+            }
         }
 
         /// <summary>

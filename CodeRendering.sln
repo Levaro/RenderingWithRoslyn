@@ -5,12 +5,12 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D165EB5E-E7A9-4323-834C-1D525ECF262A}"
 	ProjectSection(SolutionItems) = preProject
+		SolutionItems\CSharp.Display.ruleset = SolutionItems\CSharp.Display.ruleset
+		SolutionItems\CSharp.Display.Tests.ruleset = SolutionItems\CSharp.Display.Tests.ruleset
 		SolutionItems\CustomDictionary.xml = SolutionItems\CustomDictionary.xml
 		SolutionItems\CustomDictionary.xsd = SolutionItems\CustomDictionary.xsd
 		SolutionItems\Default.runsettings = SolutionItems\Default.runsettings
 		SolutionItems\GlobalAssemblyInfo.cs = SolutionItems\GlobalAssemblyInfo.cs
-		SolutionItems\Levaro.ruleset = SolutionItems\Levaro.ruleset
-		SolutionItems\LevaroTests.ruleset = SolutionItems\LevaroTests.ruleset
 		Readme.md = Readme.md
 		Settings.StyleCop = Settings.StyleCop
 		SolutionItems\TraceEnabled.runsettings = SolutionItems\TraceEnabled.runsettings
@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{50EE40
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{908BDFFE-8105-4E6A-B9B8-88118EFF739B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levaro.Roslyn", "Source\Levaro.Roslyn\Levaro.Roslyn.csproj", "{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levaro.CSharp.Display", "Source\Levaro.CSharp.Display\Levaro.CSharp.Display.csproj", "{571B4481-2E8E-434A-BBFF-B6952ACF3A0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levaro.Roslyn.UnitTests", "Tests\Levaro.Roslyn.UnitTests\Levaro.Roslyn.UnitTests.csproj", "{1FCABF79-00C1-4750-A7CC-7EFA448149FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levaro.CSharp.Display.UnitTests", "Tests\Levaro.CSharp.Display.UnitTests\Levaro.CSharp.Display.UnitTests.csproj", "{1FCABF79-00C1-4750-A7CC-7EFA448149FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{99895EA3-792A-4352-9D6F-B5096787AB81}"
 EndProject

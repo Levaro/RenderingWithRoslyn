@@ -6,11 +6,11 @@ using System.IO;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Levaro.Roslyn.Renderers
+namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
-    /// Encapsulates the Roslyn services needed to traverse the syntax tree generated from C# code and render the syntax nodes,
-    /// tokens and trivia as they are encountered.
+    /// Encapsulates the .NET Compiler Platform (Roslyn) services needed to traverse the syntax tree generated from C# code and 
+    /// render the syntax nodes, tokens and trivia as they are encountered.
     /// </summary>
     /// <remarks>
     /// To create a renderer, subclass this class and the constructor should call the base constructor. At the very minimum, the

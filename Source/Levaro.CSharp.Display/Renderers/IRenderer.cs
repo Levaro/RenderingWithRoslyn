@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+
 using Microsoft.CodeAnalysis;
 
-namespace Levaro.Roslyn.Renderers
+namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
-    /// Defines the properties and methods that are shared by all classes that can render C# code using the associated Roslyn
+    /// Defines the properties and methods that are shared by all classes that can render C# code using the associated (Roslyn) C#
     /// <c>SyntaxTree</c> and <c>SemanticModel</c> instances. Implementations typically construct the <c>SyntaxTree</c> from 
     /// the C# and construct the <c>SemanticModel</c> if needed.
     /// </summary>

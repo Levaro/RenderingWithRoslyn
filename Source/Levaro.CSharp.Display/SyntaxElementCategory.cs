@@ -1,4 +1,4 @@
-﻿namespace Levaro.Roslyn
+﻿namespace Levaro.CSharp.Display
 {
     /// <summary>
     /// Describes the type of syntax element found in the C# syntax tree.

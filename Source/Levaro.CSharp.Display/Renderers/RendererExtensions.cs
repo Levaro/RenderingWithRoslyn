@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Levaro.Roslyn.Renderers
+namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
     /// Extension methods for C# <see cref="SyntaxToken"/> objects that are used to determine the use (semantics) of the token.

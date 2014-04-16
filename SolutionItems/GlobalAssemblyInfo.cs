@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Levaro.Roslyn")]
+[assembly: AssemblyProduct("Levaro.CSharp.Display")]
 [assembly: AssemblyCopyright("Richard Bayler Levaro Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

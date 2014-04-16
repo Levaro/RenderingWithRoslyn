@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Levaro.Roslyn
+namespace Levaro.CSharp.Display
 {
     /// <summary>
     /// Represents the class that contains event data for the <c>SyntaxVisiting</c> event.

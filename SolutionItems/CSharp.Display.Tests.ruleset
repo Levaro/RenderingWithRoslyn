@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="CSharp Display Tests Development" Description="This rule set contains Code Analysis rules used by unit tests projects in this solution; it should be used in conjunction with the solution ruleset" ToolsVersion="12.0">
+  <Include Path="CSharp.Display.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1303" Action="None" />
+    <Rule Id="CA1307" Action="None" />
+  </Rules>
+</RuleSet>

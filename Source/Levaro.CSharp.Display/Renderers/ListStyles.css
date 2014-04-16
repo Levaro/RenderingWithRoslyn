@@ -4,12 +4,15 @@
     list element (LI). Within each line, C# elements are highlighted by surrounding them with a SPAN tag having a class specifying 
     one of the HtmlClassName enumeration values. These classes really do nothing except set the color. For example,
 
-    namespace HtmlTest
+    namespace SimpleCode
     {
         internal sealed class Program
         {
-        }
-    }
+            internal static Main()
+            {
+                Console.WriteLine("Hello, Roslyn!");
+            }
+    }; 
     
     is rendered by the HtmlRender using the defaults as:
    
@@ -17,13 +20,16 @@
 
     <div class="CodeContainer">
         <ol>
-            <li data-lineNumber="1"><span class="Keyword">namespace</span> HtmlTest</li>
+            <li data-lineNumber="1"><span class="Keyword">namespace</span> SimpleCode</li>
             <li data-lineNumber="2" class="Alternate">{</li>
-            <li data-lineNumber="3">    <span class="Keyword">internal</span> <span class="Keyword">sealed</span> 
-                                                  <span class="Keyword">class</span> <span class="Identifier">Program</span></li>
+            <li data-lineNumber="3">    <span class="Keyword">internal</span> <span class="Keyword">sealed</span> <span class="Keyword">class</span> <span class="Identifier">Program</span></li>
             <li data-lineNumber="4" class="Alternate">    {</li>
-            <li data-lineNumber="5">    }</li>
-            <li data-lineNumber="6" class="Alternate">}</li>
+            <li data-lineNumber="5">    	<span class="Keyword">internal</span> <span class="Keyword">static</span> <span class="Keyword"></span>Main()</li>
+            <li data-lineNumber="6" class="Alternate">    	{</li>
+            <li data-lineNumber="7">        	<span class="InferredIdentifier">Console</span>.WriteLine(<span class="StringLiteral">&quot;Hello, Roslyn!&quot;</span>);</li>
+            <li data-lineNumber="8" class="Alternate">    	}</li>
+            <li data-lineNumber="9">    }</li>
+            <li data-lineNumber="10" class="Alternate">}</li>
         </ol>
     </div>
 */

@@ -1,8 +1,9 @@
 ﻿using System;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Levaro.Roslyn
+namespace Levaro.CSharp.Display
 {
     /// <summary>
     /// Represents a visitor class that descends an entire <see cref="CSharpSyntaxNode"/> graph visiting each <c>SyntaxNode</c> 
@@ -17,7 +18,7 @@ namespace Levaro.Roslyn
     /// <para>
     /// This is the visitor implementation that allows viewing the entire structure of a <see cref="CSharpSyntaxTree"/> instance.
     /// The renderers use this class to "walk the tree" and convert the node, token and trivia objects to a renderable format, for
-    /// example text or HTML. See the <see cref="Levaro.Roslyn.Renderers.CoreRenderer.Render(System.IO.TextWriter, string)"/> 
+    /// example text or HTML. See the <see cref="Levaro.CSharp.Display.Renderers.CoreRenderer.Render(System.IO.TextWriter, string)"/> 
     /// for an example.
     /// </para>
     /// </remarks>

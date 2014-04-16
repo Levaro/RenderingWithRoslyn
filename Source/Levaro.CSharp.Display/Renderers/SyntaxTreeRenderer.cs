@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.CodeAnalysis;
 
-namespace Levaro.Roslyn.Renderers
+namespace Levaro.CSharp.Display.Renderers
 {
     /// <summary>
     /// Renders the C# code as a tree of syntax nodes, tokens and trivia.
