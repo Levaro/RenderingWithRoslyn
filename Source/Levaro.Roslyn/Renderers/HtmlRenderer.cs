@@ -87,6 +87,7 @@ namespace Levaro.Roslyn.Renderers
             // Find the HtmlRenderer listener if there is one; messages are only displayed to this renderer when it exists.
             Listener = Trace.Listeners.OfType<TraceListener>().SingleOrDefault(l => l.Name == "HtmlRenderer");
             TracingIndent = 0;
+            IsTracingNewLine = true;
             TracingStopwatch = new Stopwatch();
             
             // The callback only processes the Token and Trivia states; the node states are used for tracing.
@@ -238,6 +239,21 @@ namespace Levaro.Roslyn.Renderers
         /// The tracing indent value; it is used by the Trace method that write messages to the <see cref="TraceListener"/>.
         /// </value>
         private int TracingIndent
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the current trace information is placed on a new line.
+        /// </summary>
+        /// <remarks>
+        /// When <c>true</c>, the number of <see cref="TracingIndent"/> spaces is written before the next content.
+        /// </remarks>
+        /// <value>
+        /// <c>true</c> if the next tracing output is on a new line; otherwise, <c>false</c>.
+        /// </value>
+        private bool IsTracingNewLine
         {
             get;
             set;
@@ -620,9 +636,9 @@ namespace Levaro.Roslyn.Renderers
 
             ISymbol symbol = token.GetSymbol(SemanticModel);
 
-            TraceWriteLine("For identifier token [{0}], symbol is [{1}]",
-                           token.Text,
-                           (symbol == null) ? "Null" : symbol.Kind.ToString());
+            TraceWrite("For identifier token [{0}], symbol is [{1}] ", 
+                       token.Text,
+                       (symbol == null) ? "Null" : symbol.Kind.ToString());
 
             if (symbol != null)
             {
@@ -656,7 +672,7 @@ namespace Levaro.Roslyn.Renderers
             {
                 if (InferIdentifier)
                 {
-                    className = IsIdentifier(token) ? HtmlClassName.Identifier : HtmlClassName.None;
+                    className = IsIdentifier(token) ? HtmlClassName.InferredIdentifier : HtmlClassName.None;
                 }
                 else
                 {
@@ -686,11 +702,6 @@ namespace Levaro.Roslyn.Renderers
         {
             bool isIdentifier = false;
 
-            // Now if the class is still unknown, find it by checking its syntax kind of its ancestor nodes
-            SyntaxKind parentKind = AncestorKind(token, 1);
-            SyntaxKind grandParentKind = AncestorKind(token, 2);
-            SyntaxKind greatGrandParentKind = AncestorKind(token, 3);
-
             SyntaxKind[] identifierNameKnownKinds = new SyntaxKind[]
             {
                 SyntaxKind.Attribute,
@@ -705,23 +716,15 @@ namespace Levaro.Roslyn.Renderers
                 SyntaxKind.VariableDeclaration
             };
 
-            if ((parentKind == SyntaxKind.EnumDeclaration) ||
-                ((parentKind == SyntaxKind.IdentifierName) && token.IsInNode(identifierNameKnownKinds)) ||
-                ((parentKind == SyntaxKind.GenericName) && token.IsInNode(SyntaxKind.VariableDeclaration, SyntaxKind.ObjectCreationExpression)))
+            if (token.IsNameInNode(identifierNameKnownKinds) || 
+                (token.IsNameInNode(SyntaxKind.ForEachStatement) && (token.GetNextToken().CSharpKind() != SyntaxKind.CloseParenToken)) ||
+                (token.IsNameInNode(SyntaxKind.SimpleMemberAccessExpression) && (token.GetPreviousToken().CSharpKind() != SyntaxKind.DotToken)) ||
+                (token.IsNameInNode(3, SyntaxKind.CaseSwitchLabel) && (token.GetPreviousToken().CSharpKind() != SyntaxKind.DotToken)))
             {
                 isIdentifier = true;
             }
 
-            if (((parentKind == SyntaxKind.IdentifierName) &&
-                                            (grandParentKind == SyntaxKind.ForEachStatement) &&
-                                            !(token.GetNextToken().CSharpKind() == SyntaxKind.CloseParenToken)) ||
-                 ((parentKind == SyntaxKind.IdentifierName) &&
-                                            (greatGrandParentKind == SyntaxKind.CaseSwitchLabel) &&
-                                            !(token.GetPreviousToken().CSharpKind() == SyntaxKind.DotToken)))
-            {
-                isIdentifier = true;
-            }
-
+            TraceWrite(" *** Inferred ... "); 
             return isIdentifier;
         }
 
@@ -755,31 +758,6 @@ namespace Levaro.Roslyn.Renderers
             return className;
         }
 
-        /// <summary>
-        /// Returns the <see cref="SyntaxKind"/> of ancestor syntax nodes of the specified syntax token.
-        /// </summary>
-        /// <param name="token">The token whose syntax kind of an ancestor node if found.</param>
-        /// <param name="ancestorLevel">The ancestor level; for example, parent is 1, grandparent is 2 and great grandparent
-        /// is 2.</param>
-        /// <returns>The <c>SyntaxKind</c> enumeration value of the specified ancestor. If there is no ancestor at the
-        /// requested level (<paramref name="ancestorLevel"/>) the <c>SyntaxKind.None</c> is returned.
-        /// </returns>
-        private static SyntaxKind AncestorKind(SyntaxToken token, int ancestorLevel)
-        {
-            int level = 1;
-            SyntaxKind ancestorKind = SyntaxKind.None;
-            for (SyntaxNode ancestor = token.Parent; ancestor != null; ancestor = ancestor.Parent)
-            {
-                if (level++ == ancestorLevel)
-                {
-                    ancestorKind = ancestor.CSharpKind();
-                    break;
-                }
-            }
-
-            return ancestorKind;
-        }
-
         #region Tracing helper methods
         /// <summary>
         /// Writes an informational message to the HtmlRenderer trace listener using the specified array of objects and formatting 
@@ -792,7 +770,12 @@ namespace Levaro.Roslyn.Renderers
         {
             if (Listener != null)
             {
-                Listener.Write(new string(' ', TracingIndent));
+                if (IsTracingNewLine)
+                {
+                    Listener.Write(new string(' ', TracingIndent));
+                    IsTracingNewLine = false;
+                }
+
                 Listener.Write(string.Format(format, args));
                 Listener.Flush();
             }
@@ -809,9 +792,14 @@ namespace Levaro.Roslyn.Renderers
         {
             if (Listener != null)
             {
-                Listener.Write(new string(' ', TracingIndent));
+                if (IsTracingNewLine)
+                {
+                    Listener.Write(new string(' ', TracingIndent));
+                }
+
                 Listener.Write(string.Format(format, args));
                 Listener.WriteLine(string.Empty);
+                IsTracingNewLine = true;
                 Listener.Flush();
             }
         }

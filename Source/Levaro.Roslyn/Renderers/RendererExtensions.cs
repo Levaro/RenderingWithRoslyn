@@ -65,6 +65,92 @@ namespace Levaro.Roslyn.Renderers
         }
 
         /// <summary>
+        /// Determines whether the grand parent of the token whose parent node is of <see cref="SyntaxKind.IdentifierName"/>
+        /// has a <see cref="SyntaxKind"/> value specified.
+        /// values.
+        /// </summary>
+        /// <remarks>
+        /// This extension method is used by the <see cref="HtmlRenderer.IsIdentifier"/> method to determine if a token of 
+        /// <c>SyntaxKind.IdentifierToken</c> should be decorated with the <see cref="HtmlClassName.Identifier"/> class when
+        /// rendered as HTML.
+        /// </remarks>
+        /// <param name="token">
+        /// The syntax token whose grand parent node is checked against the specified <c>SyntaxKind</c> values.
+        /// </param>
+        /// <param name="syntaxKinds">An optional array of <c>SyntaxKind</c> values to check</param>
+        /// <returns><c>true</c> if the grand parent node is one of the <paramref name="syntaxKinds"/> values;
+        /// <c>false</c> no grand parent node exists, or the parent node is not of <c>SyntaxKind.IdentifierName</c>, or
+        /// the grand parent node does not have one of the <c>SyntaxKind</c> values.</returns>
+        /// <seealso cref="IsNameInNode(SyntaxToken, int, SyntaxKind[])"/>
+        public static bool IsNameInNode(this SyntaxToken token, params SyntaxKind[] syntaxKinds)
+        {
+            return IsNameInNode(token, 2, syntaxKinds);
+        }
+
+        /// <summary>
+        /// Determines whether the ancestor node of the token whose parent node is of <see cref="SyntaxKind.IdentifierName"/>
+        /// has a <see cref="SyntaxKind"/> value specified.
+        /// values.
+        /// </summary>
+        /// <remarks>
+        /// This extension method is used by the <see cref="HtmlRenderer.IsIdentifier"/> method to determine if a token of 
+        /// <c>SyntaxKind.IdentifierToken</c> should be decorated with the <see cref="HtmlClassName.Identifier"/> class when
+        /// rendered as HTML.
+        /// </remarks>
+        /// <param name="token">
+        /// The syntax token whose ancestor at the specified level is checked against the specified <c>SyntaxKind</c> values.
+        /// </param>
+        /// <param name="ancestor">The level of the ancestor of the token. Level 1 is the parent, 2 is the parent.Parent (or
+        /// grand parent) and so on.</param>
+        /// <param name="syntaxKinds">An optional array of <c>SyntaxKind</c> values to check</param>
+        /// <returns><c>true</c> if the specified ancestor node is one of the <paramref name="syntaxKinds"/> values;
+        /// <c>false</c> if no ancestor is found, or the immediate parent is not of <c>SyntaxKind.IdentifierName</c>, or
+        /// the specified ancestor does not have one of the <c>SyntaxKind</c> values.</returns>
+        /// <seealso cref="IsNameInNode(SyntaxToken, int, Func{SyntaxNode, bool})"/>
+        public static bool IsNameInNode(this SyntaxToken token, int ancestor, params SyntaxKind[] syntaxKinds)
+        {
+            return IsNameInNode(token, ancestor, n => (syntaxKinds != null) ? syntaxKinds.Any(k => n.IsKind(k)) : false);
+        }
+
+        /// <summary>
+        /// Determines whether the ancestor node of the token whose parent node is of <see cref="SyntaxKind.IdentifierName"/>
+        /// satisfies the <paramref name="predicate"/>.
+        /// values.
+        /// </summary>
+        /// <remarks>
+        /// This extension method is used by the <see cref="HtmlRenderer.IsIdentifier"/> method to determine if a token of 
+        /// <c>SyntaxKind.IdentifierToken</c> should be decorated with the <see cref="HtmlClassName.Identifier"/> class when
+        /// rendered as HTML.
+        /// </remarks>
+        /// <param name="token">
+        /// The syntax token whose ancestor at the specified level is checked against the predicate
+        /// </param>
+        /// <param name="ancestor">The level of the ancestor of the token. Level 1 is the parent, 2 is the parent.Parent (or
+        /// grand parent) and so on.</param>
+        /// <param name="predicate">A predicate accepting a <see cref="SyntaxNode"/> instance that is evaluated for the ancestor
+        /// of <paramref name="token"/> at the specified level.</param>
+        /// <returns><c>true</c> if the specified ancestor node for which the <paramref name="predicate"/> returns <c>true</c>;
+        /// <c>false</c> if no ancestor is found, or the immediate parent is not of <c>SyntaxKind.IdentifierName</c>,
+        /// or <paramref name="predicate"/> is <c>null</c> or the predicate returns false for the specified ancestor.</returns>
+        public static bool IsNameInNode(this SyntaxToken token, int ancestor,  Func<SyntaxNode, bool> predicate)
+        {
+            int ancestorLevel = Math.Max(ancestor, 1);
+            bool isInNode = false;
+            SyntaxNode parent = (token != null) ? token.Parent : null;
+            if ((parent != null) && (parent.CSharpKind() == SyntaxKind.IdentifierName) && (predicate != null))
+            {
+                for (int i = 1; (i < ancestorLevel) && (parent != null); i++)
+                {
+                    parent = parent.Parent;
+                }
+
+                isInNode = predicate(parent);
+            }
+
+            return isInNode;
+        }
+
+        /// <summary>
         /// Gets an <see cref="ISymbol"/> instance for the parent <see cref="SyntaxNode"/> of the specified syntax token.
         /// </summary>
         /// <remarks>
@@ -74,7 +160,7 @@ namespace Levaro.Roslyn.Renderers
         /// </remarks>
         /// <param name="token">The <see cref="SyntaxToken"/> whose parent's <see cref="ISymbol"/> is returned.</param>
         /// <param name="model">The <see cref="SemanticModel"/> used to find the symbol for the parent of the
-        /// <paramref name="token"/>..</param>
+        /// <paramref name="token"/>.</param>
         /// <returns>An <see cref="ISymbol"/> instance for the <c>token.Parent</c> syntax node or <c>null</c> if one cannot
         /// be found in the semantic model.</returns>
         public static ISymbol GetSymbol(this SyntaxToken token, SemanticModel model)

@@ -55,6 +55,7 @@ namespace Levaro.Roslyn.UnitTests.Renderers
             Assert.IsTrue(traceContents.Length > 0);
 
             Trace.Listeners.Remove("HtmlRenderer");
+
             memoryStream = new MemoryStream();
             listener = new TextWriterTraceListener(memoryStream, "NotAnHtmlRenderer");
             Trace.Listeners.Add(listener);
@@ -64,6 +65,8 @@ namespace Levaro.Roslyn.UnitTests.Renderers
             codeHtml = (new HtmlRenderer()).Render(code);
             traceContents = Encoding.UTF8.GetString(memoryStream.GetBuffer()).Substring(0, (int)memoryStream.Length);
             Assert.AreEqual<int>(0, traceContents.Length);
+
+            Trace.Listeners.Remove("NotAnHtmlRenderer");
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace Levaro.Roslyn.UnitTests.Renderers
 {
     internal sealed class Program
     {
-        internal static Main()
+        internal static void Main()
         {
             Console.WriteLine(""Hello, World!"");
         }
@@ -93,9 +96,9 @@ namespace Levaro.Roslyn.UnitTests.Renderers
         <li data-lineNumber=""2"" class=""Alternate"">{</li>
         <li data-lineNumber=""3"">    <span class=""Keyword"">internal</span> <span class=""Keyword"">sealed</span> <span class=""Keyword"">class</span> <span class=""Identifier"">Program</span></li>
         <li data-lineNumber=""4"" class=""Alternate"">    {</li>
-        <li data-lineNumber=""5"">        <span class=""Keyword"">internal</span> <span class=""Keyword"">static</span> <span class=""Keyword""></span>Main()</li>
+        <li data-lineNumber=""5"">        <span class=""Keyword"">internal</span> <span class=""Keyword"">static</span> <span class=""Keyword"">void</span> Main()</li>
         <li data-lineNumber=""6"" class=""Alternate"">        {</li>
-        <li data-lineNumber=""7"">            <span class=""Identifier"">Console</span>.<span class=""Identifier"">WriteLine</span>(<span class=""StringLiteral"">&quot;Hello, World!&quot;</span>);</li>
+        <li data-lineNumber=""7"">            <span class=""InferredIdentifier"">Console</span>.WriteLine(<span class=""StringLiteral"">&quot;Hello, World!&quot;</span>);</li>
         <li data-lineNumber=""8"" class=""Alternate"">        }</li>
         <li data-lineNumber=""9"">    }</li>
         <li data-lineNumber=""10"" class=""Alternate"">}</li>

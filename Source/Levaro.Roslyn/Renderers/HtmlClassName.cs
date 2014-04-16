@@ -41,9 +41,16 @@
         Identifier,
 
         /// <summary>
-        /// The token is an identifier, but its meaning is unknown (that is, no symbol in the semantic model)
+        /// The token is an identifier, but its meaning is unknown (that is, no symbol in the semantic model) and it was not
+        /// inferred as an identifier.
         /// </summary>
         UnknownIdentifier,
+
+        /// <summary>
+        /// The token is an identifier, but its meaning is unknown (that is, no symbol in the semantic model) but it was
+        /// inferred as an identifier.
+        /// </summary>
+        InferredIdentifier,
 
         /// <summary>
         /// The trivia is a comment; inline (using //) or multi-line (using /* ... */)
