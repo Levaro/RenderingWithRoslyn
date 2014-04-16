@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using Levaro.Roslyn;
 using Levaro.Roslyn.Renderers;
 using Microsoft.CodeAnalysis;
@@ -80,27 +79,31 @@ namespace HtmlRendering
 
             string defaultCss = string.Empty;
             Assembly assembly = typeof(CodeWalker).Assembly;
-            using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream("Levaro.Roslyn.Renderers.ListStyles.css")))
+
+            // If you want the style sheet to be readable in the generated files, use the non-minified version, ListStyles.css.
+            string resourceName = "Levaro.Roslyn.Renderers.ListStyles.min.css";
+            using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream(resourceName)))
             {
                 defaultCss = reader.ReadToEnd();
             }
 
-            // The embedded stylesheet has a lot of comments that are not necessary, so remove those and any blank lines just
+            // Uncomment the two code lines if you access the ListStyle.css resource in order to remove all the comment and blank
+            // lines, of course this is not necessary when recovering the minified version.
+            // The ListStyles.css stylesheet has a lot of comments that are not necessary, so remove those and any blank lines just
             // so the generated HTML is not any bigger than it need be. First the CSS comments "/*...*/":
-            string noComments = Regex.Replace(defaultCss, @"(/\*.*?\*/)", string.Empty, RegexOptions.Singleline);
-
+            // string noComments = Regex.Replace(defaultCss, @"(/\*.*?\*/)", string.Empty, RegexOptions.Singleline);
             // And now any blank lines (some may have been created when removing comments too!):
-            defaultCss = Regex.Replace(noComments, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
+            // defaultCss = Regex.Replace(noComments, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
 
             // The PageTemplate.html is a small HTML file having {{text}} that is replaced to create a stand-alone page for the
-            // generated HTML code. The default style sheet (see ListStyle.css in Levaro.Roslyn.Renderers) is an embedded
-            // resource and is recovered and "inserted" in the pageTemplate.
+            // generated HTML code. The default style sheet (see ListStyle.css or ListStyle.min.css in Levaro.Roslyn.Renderers) is 
+            // an embedded resource and is recovered and "inserted" in the pageTemplate.
             string pageTemplate = File.ReadAllText("PageTemplate.html").Replace("{{Styles}}", defaultCss);
 
             // The HTML renderer uses all the defaults except that line numbers are included. Metadata references should be
-            // altered to reflect that code to render. This is currently set to render the Levaro.Roslyn code in this project.
+            // altered to reflect the code to render. This is currently set to render the Levaro.Roslyn code in this project.
             // You should change or remove appropriate for your needs.
-            // TODO: All the assemblies to be specified from the command line.
+            // TODO: Allow the assemblies to be specified from the command line.
             HtmlRenderer renderer = new HtmlRenderer();
             renderer.IncludeLineNumbers = true;
             Assembly roslyn = typeof(CodeWalker).Assembly;

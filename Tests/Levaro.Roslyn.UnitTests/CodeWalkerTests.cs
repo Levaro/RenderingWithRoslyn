@@ -63,7 +63,7 @@ namespace Levaro.Roslyn.UnitTests
         [TestMethod]
         public void EventHandlerTest()
         {
-            string code = @"Write(""Hello Richard"") ;";
+            string code = "Write(\"Hello Roslyn\") ;";
 
             // The visiting state, element type (node, token or trivia) and syntax kind for each raised event in this order
             // for the parsed code text.

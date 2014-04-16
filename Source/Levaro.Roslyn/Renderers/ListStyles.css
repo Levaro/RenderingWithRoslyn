@@ -129,23 +129,13 @@ div.CodeContainer
         color: #a31515;
     }
 
-    div.CodeContainer li span.Identifier
-    {
-        color: #2b91af;
-    }
-
-    div.CodeContainer li span.UnknownIdentifier
-    {
-        color: #2b91af;
-        font-style: italic;
-    }
-
+    div.CodeContainer li span.Identifier,
+    div.CodeContainer li span.UnknownIdentifier,
     div.CodeContainer li span.InferredIdentifier
     {
-        color: #1d1b1b;
-        font-style:italic;
+        color: #2b91af;
     }
-
+    
     div.CodeContainer li span.Comment
     {
         color: #008000;
