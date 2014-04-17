@@ -205,6 +205,7 @@ namespace Levaro.CSharp.Display.Renderers
             set;
         }
 
+        #region Diagnostic support properties
         /// <summary>
         /// Gets or sets a value indicating whether currently processing line has any code text within.
         /// </summary>
@@ -271,6 +272,7 @@ namespace Levaro.CSharp.Display.Renderers
             get;
             set;
         }
+        #endregion
 
         /// <summary>
         /// Gets the text that is written to <see cref="CoreRenderer.Writer" /> before the <see cref="SyntaxTree" /> elements 
@@ -344,8 +346,14 @@ namespace Levaro.CSharp.Display.Renderers
         /// (and their helper methods) do the heavy lifting to generate the correct HTML code for the C# code text.
         /// </remarks>
         /// <param name="syntaxTreeElement">The syntax tree element containing the token or trivia.</param>
-        private void ProcessTokenOrTrivia(SyntaxTreeElement syntaxTreeElement)
+        /// <exception cref="ArgumentNullException">if <paramref name="syntaxTreeElement"/> is <c>null</c>.</exception>
+        protected virtual void ProcessTokenOrTrivia(SyntaxTreeElement syntaxTreeElement)
         {
+            if (syntaxTreeElement == null)
+            {
+                throw new ArgumentNullException("syntaxTreeElement", "SyntaxTree element may not be null.");
+            }
+
             HtmlClassName className = GetHtmlClass(syntaxTreeElement);
             string text = GetText(syntaxTreeElement);
             TraceWriteLine("Class Name: [{0}]; Text: [{1}]", className, text.Replace("\r\n", "\\r\\n"));
@@ -407,8 +415,14 @@ namespace Levaro.CSharp.Display.Renderers
         /// <returns>The text that actually represents the token or trivia, which is typically the <c>Text</c>
         /// property of the <paramref name="element"/> parameter. However, the text is replaced or encoded for some tokens (end 
         /// of line or angle braces, for example) when that is required for HTML rendering.</returns>
-        private string GetText(SyntaxTreeElement element)
+        /// <exception cref="ArgumentNullException">if <paramref name="element"/> is <c>null</c>.</exception>
+        protected virtual string GetText(SyntaxTreeElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element", "SyntaxTree element cannot be null.");
+            }
+
             string text = element.Text;
             bool checkIsLineEmpty = true;
             switch (element.SyntaxKind)
@@ -506,8 +520,14 @@ namespace Levaro.CSharp.Display.Renderers
         /// </remarks>
         /// <param name="treeElement">The tree element.</param>
         /// <returns>A value of the <see cref="HtmlClassName"/> enumeration.</returns>
-        private HtmlClassName GetHtmlClass(SyntaxTreeElement treeElement)
+        /// <exception cref="ArgumentNullException">if <paramref name="treeElement"/> is <c>null</c>.</exception>
+        protected virtual HtmlClassName GetHtmlClass(SyntaxTreeElement treeElement)
         {
+            if (treeElement == null)
+            {
+                throw new ArgumentNullException("treeElement", "SyntaxTree element cannot be null.");
+            }
+
             HtmlClassName className = HtmlClassName.Unknown;
             switch (treeElement.SyntaxElementCategory)
             {
@@ -530,7 +550,7 @@ namespace Levaro.CSharp.Display.Renderers
         /// <param name="token">The <see cref="SyntaxToken"/> object for which a <c>HtmlClassName</c> enumeration
         /// value is returned.</param>
         /// <returns>A value of the <see cref="HtmlClassName"/> enumeration.</returns>
-        private HtmlClassName GetHtmlClass(SyntaxToken token)
+        protected virtual HtmlClassName GetHtmlClass(SyntaxToken token)
         {
             HtmlClassName className = HtmlClassName.Unknown;
 
@@ -631,7 +651,7 @@ namespace Levaro.CSharp.Display.Renderers
         /// wrapped in a "span" tag. The only other values returned are <c>HtmlClassName.Identifier</c> or
         /// <c>HtmlClassName.UnknownIdentifier.</c></returns>
         /// <seealso cref="IsIdentifier"/>
-        private HtmlClassName GetIdentifierTokenHtmlClass(SyntaxToken token)
+        protected virtual HtmlClassName GetIdentifierTokenHtmlClass(SyntaxToken token)
         {
             HtmlClassName className = HtmlClassName.Unknown;
 
@@ -735,7 +755,7 @@ namespace Levaro.CSharp.Display.Renderers
         /// <param name="trivia">The <see cref="SyntaxTrivia"/> object for which a <c>HtmlClassName</c> enumeration
         /// value is returned.</param>
         /// <returns>A value of the <see cref="HtmlClassName"/> enumeration.</returns>
-        private static HtmlClassName GetHtmlClass(SyntaxTrivia trivia)
+        protected virtual HtmlClassName GetHtmlClass(SyntaxTrivia trivia)
         {
             HtmlClassName className = HtmlClassName.Unknown;
             switch (trivia.CSharpKind())

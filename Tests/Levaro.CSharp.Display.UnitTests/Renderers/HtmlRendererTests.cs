@@ -40,7 +40,7 @@ namespace Levaro.CSharp.Display.UnitTests.Renderers
                 embeddedStyleSheet = reader.ReadToEnd();
             }
 
-            cssFile = File.ReadAllText("ListStyles.css");
+            cssFile = File.ReadAllText("ListStyles.min.css");
             Assert.AreEqual<string>(cssFile, embeddedStyleSheet);
         }
 
