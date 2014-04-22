@@ -5,15 +5,24 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D165EB5E-E7A9-4323-834C-1D525ECF262A}"
 	ProjectSection(SolutionItems) = preProject
-		SolutionItems\CSharp.Display.ruleset = SolutionItems\CSharp.Display.ruleset
-		SolutionItems\CSharp.Display.Tests.ruleset = SolutionItems\CSharp.Display.Tests.ruleset
-		SolutionItems\CustomDictionary.xml = SolutionItems\CustomDictionary.xml
-		SolutionItems\CustomDictionary.xsd = SolutionItems\CustomDictionary.xsd
-		SolutionItems\Default.runsettings = SolutionItems\Default.runsettings
-		SolutionItems\GlobalAssemblyInfo.cs = SolutionItems\GlobalAssemblyInfo.cs
+		Solution Items\CSharp.Display.ruleset = Solution Items\CSharp.Display.ruleset
+		Solution Items\CSharp.Display.Tests.ruleset = Solution Items\CSharp.Display.Tests.ruleset
+		Solution Items\CustomDictionary.xml = Solution Items\CustomDictionary.xml
+		Solution Items\CustomDictionary.xsd = Solution Items\CustomDictionary.xsd
+		Solution Items\Default.runsettings = Solution Items\Default.runsettings
+		Solution Items\GlobalAssemblyInfo.cs = Solution Items\GlobalAssemblyInfo.cs
+		Solution Items\TraceEnabled.runsettings = Solution Items\TraceEnabled.runsettings
+	EndProjectSection
+	ProjectSection(Solution Items) = preProject
+		Solution Items\CSharp.Display.ruleset = Solution Items\CSharp.Display.ruleset
+		Solution Items\CSharp.Display.Tests.ruleset = Solution Items\CSharp.Display.Tests.ruleset
+		Solution Items\CustomDictionary.xml = Solution Items\CustomDictionary.xml
+		Solution Items\CustomDictionary.xsd = Solution Items\CustomDictionary.xsd
+		Solution Items\Default.runsettings = Solution Items\Default.runsettings
+		Solution Items\GlobalAssemblyInfo.cs = Solution Items\GlobalAssemblyInfo.cs
 		Readme.md = Readme.md
 		Settings.StyleCop = Settings.StyleCop
-		SolutionItems\TraceEnabled.runsettings = SolutionItems\TraceEnabled.runsettings
+		Solution Items\TraceEnabled.runsettings = Solution Items\TraceEnabled.runsettings
 		WE-Markdown.css = WE-Markdown.css
 	EndProjectSection
 EndProject
