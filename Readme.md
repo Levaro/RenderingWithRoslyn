@@ -2,7 +2,7 @@
 
 ## Release Notes ##
 
-- 0.1.14107 First initial pre-release
+- 0.1.14107-beta  First initial pre-release
 
 ----
 
@@ -193,7 +193,7 @@ project and select "Debug | Start Without Debugging" (Ctrl+F5).
 
 [Status]: #Status "Release Status Details"
 ## Status ##
-This is the first pre-release (version 0.1.14107) for the C# Display solution and includes the core class library, unit 
+This is the first pre-release (version 0.1.14107-beta) for the C# Display solution and includes the core class library, unit 
 tests and the sample console application project `HtmlRendering`. All projects target .NET 4.5.1 and enable both Code Analys and 
 StyleCop. The Code Analysis rule set and custom dictionary files as well as the StyleCop settings file are included in the
 solution. The 
