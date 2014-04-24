@@ -11,15 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Solution Items\CustomDictionary.xsd = Solution Items\CustomDictionary.xsd
 		Solution Items\Default.runsettings = Solution Items\Default.runsettings
 		Solution Items\GlobalAssemblyInfo.cs = Solution Items\GlobalAssemblyInfo.cs
-		Solution Items\TraceEnabled.runsettings = Solution Items\TraceEnabled.runsettings
-	EndProjectSection
-	ProjectSection(Solution Items) = preProject
-		Solution Items\CSharp.Display.ruleset = Solution Items\CSharp.Display.ruleset
-		Solution Items\CSharp.Display.Tests.ruleset = Solution Items\CSharp.Display.Tests.ruleset
-		Solution Items\CustomDictionary.xml = Solution Items\CustomDictionary.xml
-		Solution Items\CustomDictionary.xsd = Solution Items\CustomDictionary.xsd
-		Solution Items\Default.runsettings = Solution Items\Default.runsettings
-		Solution Items\GlobalAssemblyInfo.cs = Solution Items\GlobalAssemblyInfo.cs
 		Readme.md = Readme.md
 		Settings.StyleCop = Settings.StyleCop
 		Solution Items\TraceEnabled.runsettings = Solution Items\TraceEnabled.runsettings
