@@ -118,16 +118,6 @@ namespace Levaro.CSharp.Display.Renderers
         ///     The code text is parsed to produce a <c>SyntaxTree</c>
         /// </description></item>
         /// <item><description>
-        ///     The code text is parsed to produce a <c>SyntaxTree</c>
-        /// </description></item>
-        /// <item><description>
-        ///     The code text is parsed to produce a <c>SyntaxTree</c>
-        /// </description></item>
-        /// <item><description>
-        ///     If <c>FormatCode</c> is <c>true</c>, the root of the tree is recovered and formatted using the Format method
-        ///     with default options. Because this alters the syntax tree, the new tree is copied to the <c>SyntaxTree</c> property.
-        /// </description></item>
-        /// <item><description>
         ///     A compilation unit is created from the <c>SyntaxTree</c> and <c>MetadataReferences</c> properties and from that
         ///     the <c>SemanticModel</c> is initialized. Note that renderers that are only interested in the syntax need not 
         ///     access the semantic mode, but the HTML renderer does need this information to determine if an identifier represents

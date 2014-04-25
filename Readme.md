@@ -1,7 +1,12 @@
 #C# Code Rendering with Roslyn
 
-## Release Notes ##
+## Release Notes #
 
+- 0.1.14116-beta  A 
+[NuGet package](https://www.nuget.org/packages/RenderingWithRoslyn/0.1.14116-beta "C# Code Rendering with Roslyn") is now available 
+which installs the C# Display assembly, XML code documentation file and a
+PDB file. Also a copy of this file (as HTML) and a Readme.txt file are installed in a "Docs" folder. The command 
+`package-install RenderingWithRoslyn -pre` from the Package Manager Console installs the package.
 - 0.1.14107-beta  First initial pre-release
 
 ----
@@ -151,7 +156,7 @@ a bit more detail.
 The `HtmlRenderer` is more complicated, but because of the division of labor in the C# Display project, the code in the renderer is 
 just about output rather than processing the C# source. This summary does not contain a blow-by-blow description of the HTML 
 renderer &mdash; for that you should inspect the code itself. Having an understanding of the core renderer provides a decent 
-roadmap for inspecting and understanding the HTML renderer code. What follows are some (but not all) highlights.
+road map for inspecting and understanding the HTML renderer code. What follows are some (but not all) highlights.
 
 Lists are used to render the lines of C# as seen earlier. An ordered list is used if the property `IncludeLineNumbers` is true and
 otherwise an unordered list is used. Each list element (LI tag) begins with a data-dash property specifying the line number. This
@@ -164,13 +169,13 @@ should be "highlighted" or distinguished by placing it within a SPAN tag having 
 associated each token or trivia element with a `HtmlClassName` enumeration value. If the class name is `HtmlClassName.None` then
 the text of the element is displayed without alteration; otherwise it is wrapped in a SPAN tag using that class name.
 
-The idea is straigtforward, but gets a little complicated especially with documentation and multi-line comments and most
+The idea is straightforward, but gets a little complicated especially with documentation and multi-line comments and most
 importantly, identifiers.
 
-Unlike keywords for example, which always have the class name `HtmlClassName.Keyword` value, identiers are not treated the same.
+Unlike keywords for example, which always have the class name `HtmlClassName.Keyword` value, identifiers are not treated the same.
 For example, types are typically displayed (color-coded) differently depending upon how they're used. And that's where the 
 semantic model comes in. For identifiers, if it is not clear from the `SyntaxKind` what class name to assign, then the semantic
-model is used to find a symbol for the token and the `Microsoft.CodeAnalysis.SymbolKind` enumeration value. For examaple, 
+model is used to find a symbol for the token and the `Microsoft.CodeAnalysis.SymbolKind` enumeration value. For example, 
 an identifier with the value `SymbolKind.NameType` is assigned `HtmlClassName.Identifier`, but for `SymbolKind.Field` 
 it is assigned `HtmlClassName.None`.
 
@@ -187,18 +192,19 @@ classes. For convenience, the minified version is also embedded. The style sheet
 to create HTML that renders in the browser as close to Visual Studio 2013 rendering of C# code as possible.
 
 The sample (console) program project `HtmlRendering` illustrates how the HTML renderer can be used and in particular how to
-extract the embedded stylesheet. The program reads all the C# code files in the C# Display class library project and generates
+extract the embedded style sheet. The program reads all the C# code files in the C# Display class library project and generates
 corresponding HTML files. To execute the program, load the solution into Visual Studio 2013 make `HtmlRendering` the start up 
 project and select "Debug | Start Without Debugging" (Ctrl+F5).
 
 [Status]: #Status "Release Status Details"
 ## Status ##
-This is the first pre-release (version 0.1.14107-beta) for the C# Display solution and includes the core class library, unit 
-tests and the sample console application project `HtmlRendering`. All projects target .NET 4.5.1 and enable both Code Analys and 
+This is the pre-release (version 0.1.14116-beta) for the C# Display solution and includes the core class library, unit 
+tests and the sample console application project `HtmlRendering`. All projects target .NET 4.5.1 and enable both Code Analysis and 
 StyleCop. The Code Analysis rule set and custom dictionary files as well as the StyleCop settings file are included in the
 solution. The 
 [Rosyln C# NuGet (prerelease)](http://www.nuget.org/packages/Microsoft.CodeAnalysis.CSharp/0.6.4033103-beta/ ".NET Compiler Platform -- Roslyn -- support for C#, Microsoft.CodeAnalysis.CSharp.dll.") 
-package is referenced and can be automatically included when the solution file is opened in Visual Studio 2013.
+package is referenced and can be automatically included when the the C# Display solution file is opened in Visual Studio 2013.
 
-Expect changes as Roslyn releases continue, and more unit test and sample programs are added. Finally, a NuGet package to include
-the C# Display assembly and the dependent Roslyn assemblies will be available soon.
+Expect changes as Roslyn releases continue, and more unit test and sample programs are added. For applications a NuGet package
+that includes the C# Display assembly and the dependent Roslyn assemblies is now available (see Release notes at the beginning
+of this document).
