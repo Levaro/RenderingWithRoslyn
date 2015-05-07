@@ -20,7 +20,7 @@ namespace Levaro.CSharp.Display.Renderers
         /// <seealso cref="IsInNode(SyntaxToken, Func{SyntaxNode, bool})"/>
         public static bool IsInDocumentationCommentTrivia(this SyntaxToken token)
         {
-            return IsInNode(token, n => SyntaxFacts.IsDocumentationCommentTrivia(n.CSharpKind()));
+            return IsInNode(token, n => SyntaxFacts.IsDocumentationCommentTrivia(n.Kind()));
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Levaro.CSharp.Display.Renderers
             int ancestorLevel = Math.Max(ancestor, 1);
             bool isInNode = false;
             SyntaxNode parent = (token != null) ? token.Parent : null;
-            if ((parent != null) && (parent.CSharpKind() == SyntaxKind.IdentifierName) && (predicate != null))
+            if ((parent != null) && (parent.Kind() == SyntaxKind.IdentifierName) && (predicate != null))
             {
                 for (int i = 1; (i < ancestorLevel) && (parent != null); i++)
                 {

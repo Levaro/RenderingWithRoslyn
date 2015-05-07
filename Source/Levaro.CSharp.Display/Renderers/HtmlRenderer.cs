@@ -101,7 +101,7 @@ namespace Levaro.CSharp.Display.Renderers
                             TracingIndent += 4;
                             string text = syntaxTreeElement.Text;
                             text = text.Substring(0, Math.Min(40, text.Length)).Replace("\r\n", "\\r\\n");
-                            TraceWriteLine("Entering node {0} [{1}]", syntaxTreeElement.Node.CSharpKind(), text);
+                            TraceWriteLine("Entering node {0} [{1}]", syntaxTreeElement.Node.Kind(), text);
                             break;
                         case SyntaxVisitingState.LeavingNode:
                             TraceWriteLine("Leaving node ...");
@@ -351,7 +351,7 @@ namespace Levaro.CSharp.Display.Renderers
         {
             if (syntaxTreeElement == null)
             {
-                throw new ArgumentNullException("syntaxTreeElement", "SyntaxTree element may not be null.");
+                throw new ArgumentNullException(nameof(syntaxTreeElement), "SyntaxTree element may not be null.");
             }
 
             HtmlClassName className = GetHtmlClass(syntaxTreeElement);
@@ -420,7 +420,7 @@ namespace Levaro.CSharp.Display.Renderers
         {
             if (element == null)
             {
-                throw new ArgumentNullException("element", "SyntaxTree element cannot be null.");
+                throw new ArgumentNullException(nameof(element), "SyntaxTree element cannot be null.");
             }
 
             string text = element.Text;
@@ -525,7 +525,7 @@ namespace Levaro.CSharp.Display.Renderers
         {
             if (treeElement == null)
             {
-                throw new ArgumentNullException("treeElement", "SyntaxTree element cannot be null.");
+                throw new ArgumentNullException(nameof(treeElement), "SyntaxTree element cannot be null.");
             }
 
             HtmlClassName className = HtmlClassName.Unknown;
@@ -554,16 +554,16 @@ namespace Levaro.CSharp.Display.Renderers
         {
             HtmlClassName className = HtmlClassName.Unknown;
 
-            if (token.IsKeyword() || SyntaxFacts.IsPreprocessorKeyword(token.CSharpKind()))
+            if (token.IsKeyword() || SyntaxFacts.IsPreprocessorKeyword(token.Kind()))
             {
                 className = token.IsInDocumentationCommentTrivia() ? HtmlClassName.DocumentationComment : HtmlClassName.Keyword;
             }
             else
             {
-                switch (token.CSharpKind())
+                switch (token.Kind())
                 {
                     case SyntaxKind.HashToken:
-                        if (token.IsInNode(n => SyntaxFacts.IsPreprocessorDirective(n.CSharpKind())))
+                        if (token.IsInNode(n => SyntaxFacts.IsPreprocessorDirective(n.Kind())))
                         {
                             className = HtmlClassName.Keyword;
                         }
@@ -616,7 +616,7 @@ namespace Levaro.CSharp.Display.Renderers
                         {
                             className = HtmlClassName.DocumentationComment;
                         }
-                        else if (token.IsInNode(n => SyntaxFacts.IsPreprocessorDirective(n.CSharpKind())))
+                        else if (token.IsInNode(n => SyntaxFacts.IsPreprocessorDirective(n.Kind())))
                         {
                             // If the identifier is part of the preprocessor directive (define, if, etc.), no class is used.
                             className = HtmlClassName.None;
@@ -738,9 +738,9 @@ namespace Levaro.CSharp.Display.Renderers
             };
 
             if (token.IsNameInNode(identifierNameKnownKinds) || 
-                (token.IsNameInNode(SyntaxKind.ForEachStatement) && (token.GetNextToken().CSharpKind() != SyntaxKind.CloseParenToken)) ||
-                (token.IsNameInNode(SyntaxKind.SimpleMemberAccessExpression) && (token.GetPreviousToken().CSharpKind() != SyntaxKind.DotToken)) ||
-                (token.IsNameInNode(3, SyntaxKind.CaseSwitchLabel) && (token.GetPreviousToken().CSharpKind() != SyntaxKind.DotToken)))
+                (token.IsNameInNode(SyntaxKind.ForEachStatement) && (token.GetNextToken().Kind() != SyntaxKind.CloseParenToken)) ||
+                (token.IsNameInNode(SyntaxKind.SimpleMemberAccessExpression) && (token.GetPreviousToken().Kind() != SyntaxKind.DotToken)) ||
+                (token.IsNameInNode(3, SyntaxKind.CaseSwitchLabel) && (token.GetPreviousToken().Kind() != SyntaxKind.DotToken)))
             {
                 isIdentifier = true;
             }
@@ -758,7 +758,7 @@ namespace Levaro.CSharp.Display.Renderers
         protected virtual HtmlClassName GetHtmlClass(SyntaxTrivia trivia)
         {
             HtmlClassName className = HtmlClassName.Unknown;
-            switch (trivia.CSharpKind())
+            switch (trivia.Kind())
             {
                 case SyntaxKind.SingleLineCommentTrivia:
                 case SyntaxKind.MultiLineCommentTrivia:

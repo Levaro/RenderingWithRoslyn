@@ -33,7 +33,7 @@ namespace Levaro.CSharp.Display.Renderers
             // Initialize the metadata reference list with the standard mscorlib DLL. Note that because this is not a virtual
             // property, there is no danger is doing this from the constructor.
             MetadataReferences = new List<MetadataReference>();
-            MetadataReference mscorlib = new MetadataFileReference(typeof(object).Assembly.Location);
+            MetadataReference mscorlib = MetadataReference.CreateFromAssembly(typeof(object).Assembly);
             MetadataReferences.Add(mscorlib);
         }
 
@@ -150,7 +150,7 @@ namespace Levaro.CSharp.Display.Renderers
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer", "A non-null TextWriter is required.");
+                throw new ArgumentNullException(nameof(writer), "A non-null TextWriter is required.");
             }
 
             Writer = writer;

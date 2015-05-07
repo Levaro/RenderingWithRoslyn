@@ -208,7 +208,7 @@ namespace Levaro.CSharp.Display
                 if (node != null)
                 {
                     element.Node = node;
-                    element.SyntaxKind = element.Node.CSharpKind();
+                    element.SyntaxKind = element.Node.Kind();
                     element.Text = element.Node.ToString();
                     element.SyntaxElementCategory = SyntaxElementCategory.Node;
                     element.Span = element.Node.Span;
@@ -217,7 +217,7 @@ namespace Levaro.CSharp.Display
                 {
                     object token = syntaxTreeItem;
                     element.Token = (SyntaxToken)token;
-                    element.SyntaxKind = element.Token.CSharpKind();
+                    element.SyntaxKind = element.Token.Kind();
                     element.Text = element.Token.ToString();
                     element.SyntaxElementCategory = SyntaxElementCategory.Token;
                     element.Span = element.Token.Span;
@@ -226,7 +226,7 @@ namespace Levaro.CSharp.Display
                 {
                     object trivia = syntaxTreeItem;
                     element.Trivia = (SyntaxTrivia)trivia;
-                    element.SyntaxKind = element.Trivia.CSharpKind();
+                    element.SyntaxKind = element.Trivia.Kind();
                     element.Text = element.Trivia.ToString();
                     element.SyntaxElementCategory = SyntaxElementCategory.Trivia;
                     element.Span = element.Trivia.Span;

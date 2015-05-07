@@ -69,10 +69,10 @@ namespace HtmlRendering
             HtmlRenderer renderer = new HtmlRenderer();
             renderer.IncludeLineNumbers = true;
             Assembly csharpDisplay = typeof(CodeWalker).Assembly;
-            renderer.MetadataReferences.Add(new MetadataFileReference(assembly.Location));
+            renderer.MetadataReferences.Add(MetadataReference.CreateFromAssembly(assembly));     
             csharpDisplay.GetReferencedAssemblies()
                          .ToList()
-                         .ForEach(a => renderer.MetadataReferences.Add(new MetadataFileReference(Assembly.Load(a).Location)));
+                         .ForEach(a => renderer.MetadataReferences.Add(MetadataReference.CreateFromAssembly(Assembly.Load(a))));
 
             foreach (string source in sourceFiles)
             {

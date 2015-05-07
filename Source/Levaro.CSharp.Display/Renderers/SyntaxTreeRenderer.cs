@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Levaro.CSharp.Display.Renderers
 {
@@ -165,12 +166,12 @@ namespace Levaro.CSharp.Display.Renderers
 
                 if (token.Parent != null)
                 {
-                    Writer.Write(string.Format("  Parent.Kind={0}", token.Parent.CSharpKind()));
+                    Writer.Write(string.Format("  Parent.Kind={0}", token.Parent.Kind()));
                 }
             }
             else if (treeElement.IsTrivia)
             {
-                Writer.Write(string.Format("  for Token {0}", treeElement.Trivia.Token.CSharpKind()));
+                Writer.Write(string.Format("  for Token {0}", treeElement.Trivia.Token.Kind()));
             }
 
             Writer.WriteLine();
